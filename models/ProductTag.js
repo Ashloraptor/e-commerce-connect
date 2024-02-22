@@ -7,6 +7,13 @@ class ProductTag extends Model {}
 ProductTag.init(
   {
     // define columns
+    //referenced product-tag-seeds.js
+    product_id: {
+      type: DataTypes.INTEGER
+    },
+    tag_id: {
+      type: DataTypes.INTEGER
+    }
   },
   {
     sequelize,

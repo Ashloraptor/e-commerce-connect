@@ -7,6 +7,22 @@ class Category extends Model {}
 Category.init(
   {
     // define columns
+    //referenced category-seeds.js
+    shirts: {
+      type: DataTypes.STRING
+    },
+    shorts: {
+      type: DataTypes.STRING
+    },
+    music: {
+      type: DataTypes.STRING
+    },
+    hats: {
+      type: DataTypes.STRING
+    },
+    shoes: {
+      type: DataTypes.STRING
+    }
   },
   {
     sequelize,
