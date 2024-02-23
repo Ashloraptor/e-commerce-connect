@@ -2,6 +2,7 @@
 const { Model, DataTypes } = require('sequelize');
 // import our database connection from config.js
 const sequelize = require('../config/connection');
+const Category = require('./Category');
 
 // Initialize Product model (table) by extending off Sequelize's Model class
 class Product extends Model {}
@@ -11,17 +12,33 @@ Product.init(
   {
     // define columns
     //referenced product-seeds.js
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     product_name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     price: {
-      type: DataTypes.INTEGER
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      isDecimal: true
     },
     stock: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 10,
+      isNumeric: true
     },
     category_id: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      references: {
+        model: Category,
+        key: 'category_id'
+      }
     }
   },
   {

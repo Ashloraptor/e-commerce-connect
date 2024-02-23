@@ -2,26 +2,21 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
-class Category extends Model {}
+class Category extends Model { }
 
 Category.init(
   {
     // define columns
-    //referenced category-seeds.js
-    shirts: {
-      type: DataTypes.STRING
+
+    category_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true
     },
-    shorts: {
-      type: DataTypes.STRING
-    },
-    music: {
-      type: DataTypes.STRING
-    },
-    hats: {
-      type: DataTypes.STRING
-    },
-    shoes: {
-      type: DataTypes.STRING
+    category_name: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   },
   {
