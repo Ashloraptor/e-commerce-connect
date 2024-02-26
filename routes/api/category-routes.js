@@ -5,49 +5,44 @@ const { Category, Product } = require('../../models');
 
 router.get('/', async (req, res) => {
   // find all categories
-  // Category.findAll().then((categoryData)=> {
-  //   res.json(categoryData);
-  // });
-  try{
+  // be sure to include its associated Products
+  try {
     const category = await Category.findAll({
-      include: [{ model: Product}],
+      include: [{ model: Product }],
     });
     res.status(200).json(category);
   } catch (err) {
     res.status(500).json(err);
   }
-  // be sure to include its associated Products
+
 });
 
 router.get('/:id', async (req, res) => {
   // find one category by its `id` value
-  // Category.findBy(req.params.id).then((categoryData)=>{ //not confident about findBy <3
-  //   res.json(categoryData);
-  // });
   // be sure to include its associated Products
-try{
-  const category = await Category.findByPk(req.params.id, {
-    include: [{model: Product}],
-  });
-  if (!category) {
-    res.status(404).json({message: 'No category found by that ID'});
-    return;
+  try {
+    const category = await Category.findByPk(req.params.id, {
+      include: [{ model: Product }],
+    });
+    if (!category) {
+      res.status(404).json({ message: 'No category found by that ID' });
+      return;
+    }
+    res.status(200).json(category);
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.status(200).json(category);
-} catch (err) {
-  res.status(500).json(err);
-}
 });
 
 router.post('/', (req, res) => {
   // create a new category
   Category.create(req.body)
-  .then((newCategory)=>{
-    res.json(newCategory);
-  })
-  .catch((err)=>{
-    res.json(err);
-  });  
+    .then((newCategory) => {
+      res.json(newCategory);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 router.put('/:id', (req, res) => {
@@ -55,10 +50,10 @@ router.put('/:id', (req, res) => {
   Category.update({
     //Includes all fields you can update and the data attached to the request body, assignment 7 for reference <3
   })
-  .then((updatedCategory)=>{
-    res.json(updatedCategory);
-  })
-  .catch((err)=>res.json(err));
+    .then((updatedCategory) => {
+      res.json(updatedCategory);
+    })
+    .catch((err) => res.json(err));
 });
 
 router.delete('/:id', (req, res) => {
@@ -68,10 +63,10 @@ router.delete('/:id', (req, res) => {
       id: req.params.id,
     },
   })
-  .then((deletedCategory)=>{
-    res.json(deletedCategory);
-  })
-  .catch((err)=> res.json(err));
+    .then((deletedCategory) => {
+      res.json(deletedCategory);
+    })
+    .catch((err) => res.json(err));
 });
 
 module.exports = router;
