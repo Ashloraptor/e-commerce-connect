@@ -16,7 +16,6 @@ try {
 }
 });
 
-//error 500
 router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
@@ -47,9 +46,17 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  Tag.updatee({
+  Tag.update({
         //Includes all fields you can update and the data attached to the request body, assignment 7 for reference <3
-  })
+        tag_name: req.body.tag_name,
+  },
+  {
+//gets tag based on ID
+where: {
+  id: req.params.id,
+},
+  }
+  )
   .then((updatedTag)=>{
     res.json(udatedTag);
   })
